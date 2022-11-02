@@ -9,7 +9,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-def getNews(response_text):
+def getInshortsNews(response_text):
 
     newsData = []
     soup = BeautifulSoup(response_text, 'lxml')
@@ -86,10 +86,13 @@ if __name__=="__main__":
                 print(response.status_code)
 
         response_json = json.loads(response.text)
-        news_article= getNews(response_json["html"]),
+        news_article= getInshortsNews(response_json["html"]),
         news_offset = response_json["min_news_id"]
         news_data.extend(news_article[0])
 
     df = pd.DataFrame(news_data)
+    df = df[df['source'].isin(['Hindustan Times','Reuters','Times Now','The Print','Free Press Journal','News18','Sportskeeda','Moneycontrol','Press Trust of India'])]
+    df = df[df["readMoreUrl"].str.contains("twitter.com|youtube.com|youtu.be") == False].reset_index(drop=True)
+    df = df.dropna().reset_index(drop=True)
     df.to_csv('../data/inshorts_data.csv', index=False)
     logger.info("Successfully scrapped data from inshorts")
