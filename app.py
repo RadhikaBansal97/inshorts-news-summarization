@@ -3,7 +3,7 @@ from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 import src.config as config
 from newspaper import Article
 
-model_checkpoint = f"radhikabansal/mt5-small-finetuned-amazon-en-es"
+model_checkpoint =config.FINETUNED_MODEL_CHECKPOINT
 tokenizer = AutoTokenizer.from_pretrained(model_checkpoint)
 model = AutoModelForSeq2SeqLM.from_pretrained(model_checkpoint)
 
