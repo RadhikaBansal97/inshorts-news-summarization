@@ -4,8 +4,21 @@ __pycache__/
 *$py.class
 
 .idea/
+.vscode/
 # C extensions
 *.so
+
+# csv
+*.csv
+
+# data
+data/
+flagged/
+gradio_cached_examples/
+model/
+
+# notebooks
+notebooks/
 
 # Distribution / packaging
 .Python
